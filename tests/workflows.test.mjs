@@ -3,6 +3,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
 import { runDemo } from "../src/pipeline.mjs";
 import { evaluateMeasuredExperiment, runMeasuredExperiment } from "../src/experiment.mjs";
+import { evaluatePilotPlan, runPilotPlan } from "../src/pilot.mjs";
 import { assertPublicSafe, PrivacyGateError } from "../src/lib/privacy.mjs";
 import { generateListing } from "../src/workflows/listing.mjs";
 
@@ -100,6 +101,65 @@ test("measured experiment requires status and privacy attestation", () => {
     }),
     /scenario names must be unique/,
   );
+});
+
+test("pilot plan is preregistered, fixed to 14 days, and immutable", async () => {
+  const basePlan = {
+    schema: "measured_ecommerce_ai_pilot_plan/v1",
+    study_id: "support-pilot-001",
+    preregistered_on: "2026-08-10",
+    workflow: "support-draft",
+    unit: "ticket",
+    owner_role: "pilot-owner",
+    reviewer_role: "policy-reviewer",
+    baseline_days: 2,
+    configuration_days: 2,
+    measurement_days: 8,
+    review_days: 2,
+    minimum_full_cost_savings_rate: 0.3,
+    primary_guardrails: ["policy-violation", "refund-request", "address-change", "csat"],
+    raw_input_retained: false,
+    external_actions_allowed: false,
+  };
+  const result = evaluatePilotPlan(basePlan);
+  assert.equal(result.status, "preregistered");
+  assert.equal(result.schedule.total_days, 14);
+  assert.equal(result.external_actions_allowed, false);
+  assert.match(result.plan_fingerprint, /^[a-f0-9]{64}$/);
+  assert.throws(
+    () => evaluatePilotPlan({ ...basePlan, external_actions_allowed: true }),
+    /external_actions_allowed must be false/,
+  );
+  assert.throws(
+    () => evaluatePilotPlan({ ...basePlan, unit: "script-pack" }),
+    /unit must equal ticket/,
+  );
+  assert.throws(
+    () => evaluatePilotPlan({ ...basePlan, minimum_full_cost_savings_rate: 0.2 }),
+    /preregistered 0.3 threshold/,
+  );
+  assert.throws(
+    () => evaluatePilotPlan({ ...basePlan, extra_notes: "not retained" }),
+    /unsupported fields/,
+  );
+
+  const studyId = `pilot-test-${process.pid.toString(36)}-${Date.now().toString(36)}`;
+  const input = { ...basePlan, study_id: studyId };
+  const outputDirectory = new URL("../outputs/", import.meta.url);
+  await mkdir(outputDirectory, { recursive: true });
+  const inputPath = new URL(`${studyId}-input.json`, outputDirectory);
+  const outputPath = new URL(`pilot-plan-${studyId}.json`, outputDirectory);
+  try {
+    await writeFile(inputPath, JSON.stringify(input), "utf8");
+    const run = await runPilotPlan(inputPath);
+    assert.equal(run.study_id, studyId);
+    await assert.rejects(() => runPilotPlan(inputPath), /already exists/);
+    const persisted = JSON.parse(await readFile(outputPath, "utf8"));
+    assert.equal(persisted.plan_fingerprint, evaluatePilotPlan(input).plan_fingerprint);
+  } finally {
+    await rm(inputPath, { force: true });
+    await rm(outputPath, { force: true });
+  }
 });
 
 test("measured experiment CLI reader accepts a Windows UTF-8 BOM", async () => {

@@ -9,6 +9,7 @@
     "demo": "node src/cli.mjs demo",
     "experiment": "node src/cli.mjs experiment",
     "privacy:scan": "node scripts/privacy-scan.mjs",
+    "pilot:plan": "node src/cli.mjs pilot-plan",
     "serve": "node src/cli.mjs serve",
     "serve:pages": "node scripts/serve-pages.mjs",
     "test": "node --test tests/*.test.mjs",

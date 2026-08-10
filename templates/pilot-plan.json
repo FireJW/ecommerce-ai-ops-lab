@@ -1,0 +1,22 @@
+{
+  "schema": "measured_ecommerce_ai_pilot_plan/v1",
+  "study_id": "support-pilot-001",
+  "preregistered_on": "2026-08-10",
+  "workflow": "support-draft",
+  "unit": "ticket",
+  "owner_role": "pilot-owner",
+  "reviewer_role": "policy-reviewer",
+  "baseline_days": 2,
+  "configuration_days": 2,
+  "measurement_days": 8,
+  "review_days": 2,
+  "minimum_full_cost_savings_rate": 0.3,
+  "primary_guardrails": [
+    "policy-violation",
+    "refund-request",
+    "address-change",
+    "csat"
+  ],
+  "raw_input_retained": false,
+  "external_actions_allowed": false
+}

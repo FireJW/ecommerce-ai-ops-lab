@@ -1,5 +1,6 @@
 import { runDemo } from "./pipeline.mjs";
 import { runMeasuredExperiment } from "./experiment.mjs";
+import { runPilotPlan } from "./pilot.mjs";
 import { startServer } from "./server.mjs";
 
 const command = process.argv[2] ?? "demo";
@@ -42,6 +43,11 @@ if (command === "demo") {
   const inputPath = process.argv[3];
   if (!inputPath) throw new Error("Usage: node src/cli.mjs experiment <redacted-input.json>");
   const result = await runMeasuredExperiment(inputPath);
+  console.log(JSON.stringify(result, null, 2));
+} else if (command === "pilot-plan") {
+  const inputPath = process.argv[3];
+  if (!inputPath) throw new Error("Usage: node src/cli.mjs pilot-plan <plan.json>");
+  const result = await runPilotPlan(inputPath);
   console.log(JSON.stringify(result, null, 2));
 } else {
   console.error(`Unknown command: ${command}`);

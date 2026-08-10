@@ -56,6 +56,15 @@ The input contract and two-week procedure are in `docs/EXPERIMENT.md`.
 The evaluator accepts aggregate metrics only, rejects unknown or unsafe fields,
 and never overwrites an existing study result.
 
+Pre-register the default low-risk support pilot before collecting measurements:
+
+```powershell
+npm run pilot:plan -- D:\path\to\redacted-pilot-plan.json
+```
+
+See `docs/PILOT.md` for the fixed schedule, stop conditions, and handoff to the
+measured experiment input.
+
 ## Real model mode
 
 The default provider is deterministic and offline. To opt into an OpenAI model,
