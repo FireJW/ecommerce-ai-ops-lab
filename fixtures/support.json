@@ -1,0 +1,27 @@
+{
+  "policies": [
+    {
+      "id": "tracking_delay",
+      "value": "If tracking has not moved for three business days, request a carrier trace and ask the customer to wait one additional business day."
+    },
+    {
+      "id": "address_change",
+      "value": "Address changes require human approval and are unavailable after carrier acceptance."
+    },
+    {
+      "id": "refund_authority",
+      "value": "Automated systems may not issue refunds, store credit, or discount codes."
+    }
+  ],
+  "tickets": [
+    {
+      "id": "ticket-demo-001",
+      "message": "Tracking for order ORD-REDACTED has not moved for three business days. What should I do?"
+    },
+    {
+      "id": "ticket-demo-002",
+      "message": "Can I change the delivery address for order ORD-REDACTED?"
+    }
+  ]
+}
+

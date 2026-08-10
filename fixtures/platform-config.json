@@ -1,0 +1,23 @@
+{
+  "amazon": {
+    "seller_id": "SELLER_REDACTED",
+    "marketplace_id": "ATVPDKIKX0DER",
+    "product_type": "PRODUCT_TYPE_DEFINITION_REQUIRED",
+    "language_tag": "en_US",
+    "requirements": "LISTING"
+  },
+  "shopify": {
+    "api_version": "2026-01",
+    "shop_domain": "demo-store.myshopify.com",
+    "product_id": "gid://shopify/Product/000000000"
+  },
+  "creative": {
+    "channels": [
+      "tiktok_ads",
+      "youtube_shopping"
+    ],
+    "uses_synthetic_avatar": false,
+    "uses_synthetic_voice": false
+  }
+}
+

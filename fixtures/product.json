@@ -1,0 +1,49 @@
+{
+  "sku": "DEMO-BOTTLE-750",
+  "brand": "Atlas Works",
+  "product_type": "insulated water bottle",
+  "audience": "commuters and day hikers",
+  "facts": [
+    {
+      "id": "capacity",
+      "label": "Capacity",
+      "value": "750 ml"
+    },
+    {
+      "id": "material",
+      "label": "Material",
+      "value": "18/8 stainless steel"
+    },
+    {
+      "id": "cold_duration",
+      "label": "Cold retention",
+      "value": "up to 18 hours in the brand's controlled test"
+    },
+    {
+      "id": "lid",
+      "label": "Lid",
+      "value": "threaded leak-resistant lid"
+    },
+    {
+      "id": "care",
+      "label": "Care",
+      "value": "hand wash only"
+    },
+    {
+      "id": "colors",
+      "label": "Available colors",
+      "value": "graphite and sea green"
+    }
+  ],
+  "prohibited_claims": [
+    "medical benefits",
+    "dishwasher safe",
+    "completely leakproof",
+    "lifetime guarantee"
+  ],
+  "target_markets": [
+    "US",
+    "UK"
+  ]
+}
+

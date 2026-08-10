@@ -1,0 +1,104 @@
+{
+  "name": "Ecommerce AI Listing Draft - Human Review Required",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3b4ec546-1322-4f97-a40e-f6f6246d0b74",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { sku: 'DEMO-BOTTLE-750', brand: 'Atlas Works', product_type: 'insulated water bottle', audience: 'commuters and day hikers', facts: [{ id: 'capacity', label: 'Capacity', value: '750 ml' }, { id: 'material', label: 'Material', value: '18/8 stainless steel' }, { id: 'cold_duration', label: 'Cold retention', value: \"up to 18 hours in the brand's controlled test\" }, { id: 'lid', label: 'Lid', value: 'threaded leak-resistant lid' }, { id: 'care', label: 'Care', value: 'hand wash only' }, { id: 'colors', label: 'Available colors', value: 'graphite and sea green' }], prohibited_claims: ['medical benefits', 'dishwasher safe', 'completely leakproof', 'lifetime guarantee'], target_markets: ['US', 'UK'] } }];"
+      },
+      "id": "f9353023-27a0-4f18-ae40-7ef79a22c6e7",
+      "name": "Synthetic Product Fixture",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:4317/v1/listing",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "c4de15f4-c92e-4f4f-badf-22e12f987c0c",
+      "name": "Generate Local Draft",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "11aa4395-4c98-40fa-9162-088278872d53",
+      "name": "Stop for Human Review",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        760,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Synthetic Product Fixture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthetic Product Fixture": {
+      "main": [
+        [
+          {
+            "node": "Generate Local Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Local Draft": {
+      "main": [
+        [
+          {
+            "node": "Stop for Human Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "50a5a1af-9c68-4264-8db1-331c20a1873d",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
+

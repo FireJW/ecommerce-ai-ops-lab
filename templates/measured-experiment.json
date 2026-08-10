@@ -1,0 +1,24 @@
+{
+  "schema": "measured_ecommerce_ai_experiment_input/v1",
+  "study_id": "replace-with-public-safe-id",
+  "as_of": "2026-08-10",
+  "evidence_status": "template-replace-with-measured",
+  "privacy_attestation": "template-replace-after-redaction",
+  "source_file_name": "redacted-merchant-export.json",
+  "currency": "USD",
+  "scenarios": [
+    {
+      "scenario": "replace-with-workflow-name",
+      "outputs_generated": 1,
+      "outputs_accepted": 1,
+      "baseline_minutes_per_accepted_output": 1,
+      "loaded_hourly_rate": 1,
+      "ai_generation_minutes_per_output": 1,
+      "review_minutes_per_output": 1,
+      "model_cost_total": 0,
+      "tooling_cost_total": 0,
+      "incident_cost_total": 0,
+      "guardrail_failures": 0
+    }
+  ]
+}

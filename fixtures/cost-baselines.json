@@ -1,0 +1,46 @@
+{
+  "evidence_status": "fixture",
+  "currency": "USD",
+  "scenarios": [
+    {
+      "scenario": "listing_pack",
+      "outputs_generated": 20,
+      "outputs_accepted": 18,
+      "baseline_minutes_per_accepted_output": 45,
+      "loaded_hourly_rate": 30,
+      "ai_generation_minutes_per_output": 3,
+      "review_minutes_per_output": 6,
+      "model_cost_total": 4,
+      "tooling_cost_total": 0,
+      "incident_cost_total": 0,
+      "guardrail_failures": 0
+    },
+    {
+      "scenario": "support_draft",
+      "outputs_generated": 200,
+      "outputs_accepted": 180,
+      "baseline_minutes_per_accepted_output": 8,
+      "loaded_hourly_rate": 25,
+      "ai_generation_minutes_per_output": 0.2,
+      "review_minutes_per_output": 2,
+      "model_cost_total": 6,
+      "tooling_cost_total": 20,
+      "incident_cost_total": 0,
+      "guardrail_failures": 0
+    },
+    {
+      "scenario": "creative_script_pack",
+      "outputs_generated": 12,
+      "outputs_accepted": 10,
+      "baseline_minutes_per_accepted_output": 90,
+      "loaded_hourly_rate": 35,
+      "ai_generation_minutes_per_output": 2,
+      "review_minutes_per_output": 15,
+      "model_cost_total": 7.2,
+      "tooling_cost_total": 0,
+      "incident_cost_total": 0,
+      "guardrail_failures": 0
+    }
+  ]
+}
+

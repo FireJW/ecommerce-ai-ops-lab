@@ -1,0 +1,22 @@
+{
+  "name": "ecommerce-ai-ops-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Privacy-gated ecommerce AI workflows with measurable cost evidence.",
+  "type": "module",
+  "scripts": {
+    "demo": "node src/cli.mjs demo",
+    "experiment": "node src/cli.mjs experiment",
+    "privacy:scan": "node scripts/privacy-scan.mjs",
+    "serve": "node src/cli.mjs serve",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "npm test && npm run privacy:scan && npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "openai": "^7.4.0"
+  },
+  "license": "MIT"
+}
