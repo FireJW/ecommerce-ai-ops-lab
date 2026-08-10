@@ -1,0 +1,379 @@
+{
+  "schema": "ecommerce_ai_ops_evidence_pack/v1",
+  "evidence_status": "fixture",
+  "provider": "demo",
+  "advisory_only": true,
+  "external_actions_allowed": false,
+  "results": {
+    "listing": {
+      "workflow": "listing_pack/v1",
+      "provider": "demo",
+      "sku": "DEMO-BOTTLE-750",
+      "draft": {
+        "title": {
+          "text": "Atlas Works 750 ml insulated water bottle",
+          "fact_ids": [
+            "brand",
+            "capacity",
+            "product_type"
+          ]
+        },
+        "bullets": [
+          {
+            "text": "Made from 18/8 stainless steel for everyday reuse.",
+            "fact_ids": [
+              "material"
+            ]
+          },
+          {
+            "text": "Keeps drinks cold up to 18 hours in the brand's controlled test.",
+            "fact_ids": [
+              "cold_duration"
+            ]
+          },
+          {
+            "text": "Uses a threaded leak-resistant lid.",
+            "fact_ids": [
+              "lid"
+            ]
+          },
+          {
+            "text": "hand wash only; available in graphite and sea green.",
+            "fact_ids": [
+              "care",
+              "colors"
+            ]
+          }
+        ],
+        "description": [
+          {
+            "text": "A 750 ml bottle designed for commuters and day hikers.",
+            "fact_ids": [
+              "capacity",
+              "product_type",
+              "audience"
+            ]
+          }
+        ],
+        "search_terms": [
+          "insulated bottle",
+          "commuter bottle",
+          "hiking bottle"
+        ],
+        "risk_flags": []
+      },
+      "fact_snapshot": {
+        "audience": "commuters and day hikers",
+        "brand": "Atlas Works",
+        "capacity": "750 ml",
+        "care": "hand wash only",
+        "cold_duration": "up to 18 hours in the brand's controlled test",
+        "colors": "graphite and sea green",
+        "lid": "threaded leak-resistant lid",
+        "material": "18/8 stainless steel",
+        "product_type": "insulated water bottle"
+      },
+      "validation": {
+        "passed": true,
+        "issues": []
+      },
+      "review_required": true,
+      "publish_allowed": false
+    },
+    "creative": {
+      "workflow": "creative_script_pack/v1",
+      "provider": "demo",
+      "sku": "DEMO-BOTTLE-750",
+      "draft": {
+        "angle": "A commute-to-trail hydration routine",
+        "scenes": [
+          {
+            "text": "Open on the Atlas Works insulated water bottle beside a packed day bag.",
+            "fact_ids": [
+              "brand",
+              "product_type"
+            ]
+          },
+          {
+            "text": "Show the 750 ml capacity and threaded leak-resistant lid in close-up.",
+            "fact_ids": [
+              "capacity",
+              "lid"
+            ]
+          },
+          {
+            "text": "Overlay: up to 18 hours cold in the brand's controlled test.",
+            "fact_ids": [
+              "cold_duration"
+            ]
+          },
+          {
+            "text": "End with both available colors and a neutral learn-more call to action.",
+            "fact_ids": [
+              "colors"
+            ]
+          }
+        ],
+        "caption": [
+          {
+            "text": "A 750 ml insulated bottle for commutes and day hikes. Hand wash only.",
+            "fact_ids": [
+              "capacity",
+              "product_type",
+              "audience",
+              "care"
+            ]
+          }
+        ],
+        "compliance_notes": [
+          "Do not change the product color or geometry in generated visuals.",
+          "Keep the controlled-test qualifier visible with the cold-retention claim.",
+          "Obtain likeness and voice consent before using an avatar or creator clone."
+        ]
+      },
+      "fact_snapshot": {
+        "audience": "commuters and day hikers",
+        "brand": "Atlas Works",
+        "capacity": "750 ml",
+        "care": "hand wash only",
+        "cold_duration": "up to 18 hours in the brand's controlled test",
+        "colors": "graphite and sea green",
+        "lid": "threaded leak-resistant lid",
+        "product_type": "insulated water bottle"
+      },
+      "validation": {
+        "passed": true,
+        "issues": []
+      },
+      "review_required": true,
+      "upload_allowed": false
+    },
+    "support": {
+      "workflow": "support_draft/v1",
+      "provider": "demo",
+      "tickets": [
+        {
+          "id": "ticket-demo-001",
+          "intent": "tracking_delay",
+          "confidence": 0.96,
+          "draft": {
+            "text": "Because tracking has not moved for three business days, support can request a carrier trace. Please allow one additional business day while the trace is reviewed.",
+            "fact_ids": [
+              "tracking_delay"
+            ]
+          },
+          "proposed_action": "request_carrier_trace_after_review",
+          "auto_execute_allowed": false
+        },
+        {
+          "id": "ticket-demo-002",
+          "intent": "address_change",
+          "confidence": 0.98,
+          "draft": {
+            "text": "Address changes require review and may not be available after carrier acceptance. A support specialist needs to check the order status before confirming anything.",
+            "fact_ids": [
+              "address_change"
+            ]
+          },
+          "proposed_action": "route_to_human",
+          "auto_execute_allowed": false
+        }
+      ],
+      "policy_snapshot": {
+        "address_change": "Address changes require human approval and are unavailable after carrier acceptance.",
+        "tracking_delay": "If tracking has not moved for three business days, request a carrier trace and ask the customer to wait one additional business day."
+      },
+      "validation": {
+        "passed": true,
+        "issues": []
+      },
+      "review_required": true,
+      "send_allowed": false
+    },
+    "cost": {
+      "workflow": "full_cost_evidence/v1",
+      "evidence_status": "fixture",
+      "currency": "USD",
+      "threshold": {
+        "minimum_full_cost_savings_rate": 0.3,
+        "guardrail_failures": 0
+      },
+      "scenarios": [
+        {
+          "scenario": "listing_pack",
+          "baseline_cost_per_accepted_output": 22.5,
+          "ai_cost_per_accepted_output": 5.22,
+          "full_cost_savings_rate": 0.77,
+          "acceptance_rate": 0.9,
+          "guardrail_failures": 0,
+          "decision": "experiment_threshold_met"
+        },
+        {
+          "scenario": "support_draft",
+          "baseline_cost_per_accepted_output": 3.33,
+          "ai_cost_per_accepted_output": 1.16,
+          "full_cost_savings_rate": 0.65,
+          "acceptance_rate": 0.9,
+          "guardrail_failures": 0,
+          "decision": "experiment_threshold_met"
+        },
+        {
+          "scenario": "creative_script_pack",
+          "baseline_cost_per_accepted_output": 52.5,
+          "ai_cost_per_accepted_output": 12.62,
+          "full_cost_savings_rate": 0.76,
+          "acceptance_rate": 0.83,
+          "guardrail_failures": 0,
+          "decision": "experiment_threshold_met"
+        }
+      ],
+      "interpretation": "Illustrative only. Replace every input with measured merchant data before making an ROI claim."
+    },
+    "connectors": {
+      "amazon": {
+        "connector": "amazon_listings_items_put_candidate/v1",
+        "upstream_operation": "putListingsItem",
+        "method": "PUT",
+        "path": "/listings/2021-08-01/items/SELLER_REDACTED/DEMO-BOTTLE-750",
+        "query": {
+          "marketplaceIds": [
+            "ATVPDKIKX0DER"
+          ]
+        },
+        "body": {
+          "productType": "PRODUCT_TYPE_DEFINITION_REQUIRED",
+          "requirements": "LISTING",
+          "attributes": {
+            "item_name": [
+              {
+                "value": "Atlas Works 750 ml insulated water bottle",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              }
+            ],
+            "bullet_point": [
+              {
+                "value": "Made from 18/8 stainless steel for everyday reuse.",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              },
+              {
+                "value": "Keeps drinks cold up to 18 hours in the brand's controlled test.",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              },
+              {
+                "value": "Uses a threaded leak-resistant lid.",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              },
+              {
+                "value": "hand wash only; available in graphite and sea green.",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              }
+            ],
+            "product_description": [
+              {
+                "value": "A 750 ml bottle designed for commuters and day hikers.",
+                "language_tag": "en_US",
+                "marketplace_id": "ATVPDKIKX0DER"
+              }
+            ]
+          }
+        },
+        "product_type_definition_required": true,
+        "schema_ready": false,
+        "schema_note": "Resolve the marketplace Product Type Definition and validate every attribute before signing an SP-API request.",
+        "review_required": true,
+        "execution_allowed": false
+      },
+      "shopify": {
+        "connector": "shopify_product_update_candidate/v1",
+        "api_version": "2026-01",
+        "endpoint": "https://demo-store.myshopify.com/admin/api/2026-01/graphql.json",
+        "required_scope": "write_products",
+        "request": {
+          "query": "mutation UpdateProductDraft($product: ProductUpdateInput!) {\n  productUpdate(product: $product) {\n    product { id title descriptionHtml status }\n    userErrors { field message }\n  }\n}",
+          "variables": {
+            "product": {
+              "id": "gid://shopify/Product/000000000",
+              "title": "Atlas Works 750 ml insulated water bottle",
+              "descriptionHtml": "<p>A 750 ml bottle designed for commuters and day hikers.</p><ul><li>Made from 18/8 stainless steel for everyday reuse.</li><li>Keeps drinks cold up to 18 hours in the brand&#039;s controlled test.</li><li>Uses a threaded leak-resistant lid.</li><li>hand wash only; available in graphite and sea green.</li></ul>",
+              "status": "DRAFT"
+            }
+          }
+        },
+        "review_required": true,
+        "execution_allowed": false
+      },
+      "creative": {
+        "connector": "creative_channel_manifest/v1",
+        "channels": [
+          "tiktok_ads",
+          "youtube_shopping"
+        ],
+        "source_workflow": "creative_script_pack/v1",
+        "sku": "DEMO-BOTTLE-750",
+        "assets": {
+          "angle": "A commute-to-trail hydration routine",
+          "scenes": [
+            {
+              "text": "Open on the Atlas Works insulated water bottle beside a packed day bag.",
+              "fact_ids": [
+                "brand",
+                "product_type"
+              ]
+            },
+            {
+              "text": "Show the 750 ml capacity and threaded leak-resistant lid in close-up.",
+              "fact_ids": [
+                "capacity",
+                "lid"
+              ]
+            },
+            {
+              "text": "Overlay: up to 18 hours cold in the brand's controlled test.",
+              "fact_ids": [
+                "cold_duration"
+              ]
+            },
+            {
+              "text": "End with both available colors and a neutral learn-more call to action.",
+              "fact_ids": [
+                "colors"
+              ]
+            }
+          ],
+          "captions": [
+            {
+              "text": "A 750 ml insulated bottle for commutes and day hikes. Hand wash only.",
+              "fact_ids": [
+                "capacity",
+                "product_type",
+                "audience",
+                "care"
+              ]
+            }
+          ],
+          "compliance_notes": [
+            "Do not change the product color or geometry in generated visuals.",
+            "Keep the controlled-test qualifier visible with the cold-retention claim.",
+            "Obtain likeness and voice consent before using an avatar or creator clone."
+          ]
+        },
+        "disclosures": {
+          "uses_synthetic_avatar": false,
+          "uses_synthetic_voice": false,
+          "avatar_or_voice_consent_required": false,
+          "ai_content_label_review_required": true
+        },
+        "platform_sdk_mapping_required": true,
+        "review_required": true,
+        "upload_allowed": false
+      }
+    }
+  },
+  "snapshot_label": "Synthetic fixture snapshot",
+  "public_demo": true
+}

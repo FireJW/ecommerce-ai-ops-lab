@@ -1,5 +1,7 @@
 node_modules/
 outputs/
+.playwright-cli/
+.tmp/
+docs/playwright/
 .env
 *.log
-

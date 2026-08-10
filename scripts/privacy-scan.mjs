@@ -4,7 +4,10 @@ import { relative, resolve } from "node:path";
 const ROOT = process.cwd();
 const EXCLUDED_DIRECTORIES = new Set([".git", "node_modules", "outputs"]);
 const TEXT_EXTENSIONS = new Set([
+  ".css",
   ".example",
+  ".html",
+  ".js",
   ".json",
   ".md",
   ".mjs",
@@ -68,5 +71,5 @@ if (issues.length > 0) {
   issues.forEach((issue) => console.error(`- ${issue}`));
   process.exitCode = 1;
 } else {
-  console.log(`Privacy scan passed: ${files.length} text files checked; generated outputs excluded.`);
+  console.log(`Privacy scan passed: ${files.length} text files checked; outputs directory excluded.`);
 }

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-composition-profile="signal-canvas/v1">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A public-safe ecommerce AI workflow evidence dashboard using synthetic fixtures.">
+    <meta name="design-profile" content="soft-intelligence-surface/v1">
+    <title>Ecommerce AI Ops Lab</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-design-profile="soft-intelligence-surface/v1">
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <header class="topbar">
+      <div class="brand-block">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <div>
+          <strong>Ecommerce AI Ops</strong>
+          <span>Evidence workspace</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="environment"><span class="status-dot status-dot--fixture" aria-hidden="true"></span>Fixture data</span>
+        <button class="command-button" id="download-evidence" type="button">Download evidence</button>
+      </div>
+    </header>
+
+    <nav class="view-tabs" aria-label="Workspace views" role="tablist">
+      <button id="tab-overview" role="tab" aria-controls="view-container" aria-selected="true" data-view="overview" tabindex="0" type="button">Overview</button>
+      <button id="tab-listing" role="tab" aria-controls="view-container" aria-selected="false" data-view="listing" tabindex="-1" type="button">Listing</button>
+      <button id="tab-creative" role="tab" aria-controls="view-container" aria-selected="false" data-view="creative" tabindex="-1" type="button">Creative</button>
+      <button id="tab-support" role="tab" aria-controls="view-container" aria-selected="false" data-view="support" tabindex="-1" type="button">Support</button>
+      <button id="tab-cost" role="tab" aria-controls="view-container" aria-selected="false" data-view="cost" tabindex="-1" type="button">Cost</button>
+    </nav>
+
+    <main id="workspace" class="workspace">
+      <header class="workspace-heading">
+        <div>
+          <p class="eyebrow">Synthetic control surface</p>
+          <h1>Review the workflow before automating it.</h1>
+        </div>
+        <p class="workspace-summary">Draft generation, source facts, approval gates, and full-cost evidence in one decision path.</p>
+      </header>
+
+      <section id="summary-strip" class="summary-strip" aria-label="Workflow summary"></section>
+
+      <div class="workspace-grid">
+        <section id="view-container" class="analysis-canvas" role="tabpanel" aria-labelledby="tab-overview" aria-live="polite" tabindex="0">
+          <div class="loading-state">Loading synthetic evidence...</div>
+        </section>
+
+        <aside class="evidence-rail" aria-labelledby="evidence-title">
+          <div class="rail-heading">
+            <p class="eyebrow">Decision evidence</p>
+            <h2 id="evidence-title">Run boundary</h2>
+          </div>
+          <dl id="evidence-list" class="evidence-list"></dl>
+          <section class="rail-section" aria-labelledby="connector-title">
+            <h3 id="connector-title">Connector state</h3>
+            <div id="connector-list" class="connector-list"></div>
+          </section>
+          <section class="rail-section rail-section--guardrail" aria-labelledby="guardrail-title">
+            <h3 id="guardrail-title">Approval boundary</h3>
+            <p>Publishing, messaging, refunds, address changes, discounts, and purchasing remain disabled.</p>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <span>Public-safe synthetic demonstration</span>
+      <a href="https://github.com/FireJW/ecommerce-ai-ops-lab">Source repository</a>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

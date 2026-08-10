@@ -1,5 +1,8 @@
 .env
 .git/
+.playwright-cli/
+.tmp/
+docs/playwright/
 node_modules/
 outputs/
 *.log

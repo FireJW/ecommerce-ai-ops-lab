@@ -5,6 +5,12 @@ operating cost. It turns synthetic product, support, and cost inputs into drafts
 and an evidence pack. Nothing publishes, messages customers, issues refunds, or
 changes inventory.
 
+[Live evidence dashboard](https://firejw.github.io/ecommerce-ai-ops-lab/) |
+[Experiment protocol](https://github.com/FireJW/ecommerce-ai-ops-lab/blob/main/docs/EXPERIMENT.md) |
+[Safety model](https://github.com/FireJW/ecommerce-ai-ops-lab/blob/main/SECURITY.md)
+
+[![Ecommerce AI Ops evidence dashboard](docs/assets/ecommerce-ops-preview.png)](https://firejw.github.io/ecommerce-ai-ops-lab/)
+
 ## Included capabilities
 
 - Amazon-style listing pack with source fact IDs and prohibited-claim checks.
