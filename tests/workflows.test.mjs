@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
 import { runDemo } from "../src/pipeline.mjs";
 import { evaluateMeasuredExperiment, runMeasuredExperiment } from "../src/experiment.mjs";
@@ -23,6 +23,7 @@ test("offline demo passes workflow validation and remains advisory", async () =>
 
 test("measured experiment requires status and privacy attestation", () => {
   const input = {
+    schema: "measured_ecommerce_ai_experiment_input/v1",
     study_id: "merchant-pilot-001",
     as_of: "2026-08-10",
     evidence_status: "measured",
@@ -55,11 +56,57 @@ test("measured experiment requires status and privacy attestation", () => {
     () => evaluateMeasuredExperiment({ ...input, privacy_attestation: "missing" }),
     /privacy_attestation/,
   );
+  assert.throws(
+    () => evaluateMeasuredExperiment({ ...input, unexpected_notes: "not retained" }),
+    /unsupported fields/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({ ...input, source_file_name: "merchant-export.json" }),
+    /unsupported fields/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({ ...input, as_of: "2026-02-30" }),
+    /real calendar date/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({ ...input, currency: "usd" }),
+    /currency/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({
+      ...input,
+      scenarios: [{ ...input.scenarios[0], model_cost_total: Number.NaN }],
+    }),
+    /finite number/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({
+      ...input,
+      scenarios: [{ ...input.scenarios[0], loaded_hourly_rate: -1 }],
+    }),
+    /greater than 0/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({
+      ...input,
+      scenarios: [{ ...input.scenarios[0], merchant_name: "not retained" }],
+    }),
+    /unsupported fields/,
+  );
+  assert.throws(
+    () => evaluateMeasuredExperiment({
+      ...input,
+      scenarios: [input.scenarios[0], { ...input.scenarios[0] }],
+    }),
+    /scenario names must be unique/,
+  );
 });
 
 test("measured experiment CLI reader accepts a Windows UTF-8 BOM", async () => {
+  const studyId = `bom-validation-${process.pid.toString(36)}-${Date.now().toString(36)}`;
   const input = {
-    study_id: "bom-validation",
+    schema: "measured_ecommerce_ai_experiment_input/v1",
+    study_id: studyId,
     as_of: "2026-08-10",
     evidence_status: "measured",
     privacy_attestation: "direct_identifiers_removed",
@@ -82,10 +129,30 @@ test("measured experiment CLI reader accepts a Windows UTF-8 BOM", async () => {
   };
   const outputDirectory = new URL("../outputs/", import.meta.url);
   await mkdir(outputDirectory, { recursive: true });
-  const inputPath = new URL("bom-validation-input.json", outputDirectory);
-  await writeFile(inputPath, `\uFEFF${JSON.stringify(input)}`, "utf8");
-  const result = await runMeasuredExperiment(inputPath);
-  assert.equal(result.study_id, "bom-validation");
+  const inputPath = new URL(`${studyId}-input.json`, outputDirectory);
+  const outputPath = new URL(`experiment-${studyId}.json`, outputDirectory);
+  try {
+    await writeFile(inputPath, `\uFEFF${JSON.stringify(input)}`, "utf8");
+    const result = await runMeasuredExperiment(inputPath);
+    assert.equal(result.study_id, studyId);
+    await assert.rejects(() => runMeasuredExperiment(inputPath), /already exists/);
+  } finally {
+    await rm(inputPath, { force: true });
+    await rm(outputPath, { force: true });
+  }
+});
+
+test("measured experiment rejects merchant-export-sized input before parsing", async () => {
+  const fileId = `oversized-${process.pid.toString(36)}-${Date.now().toString(36)}`;
+  const outputDirectory = new URL("../outputs/", import.meta.url);
+  await mkdir(outputDirectory, { recursive: true });
+  const inputPath = new URL(`${fileId}.json`, outputDirectory);
+  try {
+    await writeFile(inputPath, "x".repeat((64 * 1024) + 1), "utf8");
+    await assert.rejects(() => runMeasuredExperiment(inputPath), /exceeds 65536 bytes/);
+  } finally {
+    await rm(inputPath, { force: true });
+  }
 });
 
 test("privacy gate rejects direct identifiers", () => {

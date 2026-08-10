@@ -4,7 +4,6 @@
   "as_of": "2026-08-10",
   "evidence_status": "template-replace-with-measured",
   "privacy_attestation": "template-replace-after-redaction",
-  "source_file_name": "redacted-merchant-export.json",
   "currency": "USD",
   "scenarios": [
     {

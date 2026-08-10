@@ -11,7 +11,12 @@ placeholder, remove direct identifiers, and set:
 
 Do not include customer text, names, emails, addresses, order IDs, store tokens,
 supplier names, or unpublished product details. The evaluator stores only the
-cost calculation, not the raw input.
+study metadata and cost calculation, not the raw input or source file name.
+
+The input is an aggregate measurement contract, not a merchant export. Unknown
+fields, invalid dates, duplicate scenarios, non-finite or negative metrics, and
+files larger than 64 KiB are rejected. Scenario and study IDs must use lowercase
+letters, numbers, and single hyphens only.
 
 ## Measurement design
 
@@ -31,5 +36,6 @@ npm run experiment -- D:\path\to\redacted-measurement.json
 ```
 
 The command refuses fixture/template status and missing privacy attestation. It
-writes only the calculated result to the ignored `outputs/` directory.
-
+writes only the calculated result to the ignored `outputs/` directory. A study
+ID can be written once; reruns must use a new ID so an earlier result cannot be
+silently overwritten.

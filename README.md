@@ -53,6 +53,8 @@ npm run experiment -- D:\path\to\redacted-measurement.json
 ```
 
 The input contract and two-week procedure are in `docs/EXPERIMENT.md`.
+The evaluator accepts aggregate metrics only, rejects unknown or unsafe fields,
+and never overwrites an existing study result.
 
 ## Real model mode
 
